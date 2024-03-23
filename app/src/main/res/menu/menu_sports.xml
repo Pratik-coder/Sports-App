@@ -4,11 +4,13 @@
     <item
         android:id="@+id/nav_league"
         android:title="@string/str_league"
+        android:icon="@drawable/ic_baseline_sports_score_24"
         android:visible="true"/>
 
     <item
         android:id="@+id/nav_search"
         android:title="@string/str_search"
+        android:icon="@drawable/ic_baseline_search_24"
         android:visible="true"/>
 
 </menu>
