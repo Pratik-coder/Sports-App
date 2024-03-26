@@ -3,6 +3,7 @@ package com.example.sportsapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -28,20 +29,33 @@ class PlayerAdapter:RecyclerView.Adapter<PlayerAdapter.ViewHolder>() {
         return differ.currentList.size
     }
 
-     class ViewHolder(private val binding: LayoutPlayerlistBinding):RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: LayoutPlayerlistBinding):RecyclerView.ViewHolder(binding.root) {
         private val textViewPlayerName:TextView=binding.textViewPlayerName
         private val textViewNationality:TextView=binding.textViewNationality
         private val textViewHeight:TextView=binding.textViewHeight
+        private val cardView:CardView=binding.cardView
 
 
         fun onBind(playerData: PlayerData){
             val playerImageUrl=playerData.strThumb
-            Glide.with(binding.root).load(playerImageUrl).error(R.drawable.default_image).into(binding.ivCategory)
+            Glide.with(binding.root).load(playerImageUrl).error(R.drawable.default_image).into(binding.imageViewPlayer)
             textViewPlayerName.text=playerData.strPlayer
             textViewNationality.text=playerData.strNationality
             textViewHeight.text=playerData.strHeight
+            cardView.setOnClickListener {
+                onItemClickListener?.let {
+                   it(playerData)
+                }
+            }
+
         }
      }
+
+    private var onItemClickListener:((PlayerData)->Unit)?=null
+
+    fun setOnItemClickListener(listener:(PlayerData)->Unit){
+        onItemClickListener=listener
+    }
 
     private val differCallBack=object : DiffUtil.ItemCallback<PlayerData>(){
         override fun areItemsTheSame(oldItem: PlayerData, newItem: PlayerData): Boolean {

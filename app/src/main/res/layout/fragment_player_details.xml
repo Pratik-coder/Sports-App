@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+     <ScrollView
+         android:id="@+id/scrollView"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="vertical">
+
+         <ImageView
+             android:id="@+id/imageViewPlayer"
+             android:layout_width="200dp"
+             android:layout_height="200dp"
+             android:layout_gravity="center_horizontal"
+             android:scaleType="centerCrop"
+             android:layout_marginTop="50dp"/>
+
+
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_marginTop="20dp"
+             android:padding="10dp"
+             android:weightSum="1">
+
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Name :"
+               android:textSize="20sp"
+               android:textColor="@color/black"
+               android:layout_weight="0.2"/>
+
+             <TextView
+                 android:id="@+id/textViewPlayerName"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/black"
+                 android:textSize="20sp"
+                 android:layout_weight="0.8"/>
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_marginTop="20dp"
+             android:padding="10dp"
+             android:weightSum="1">
+
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Country :"
+                 android:textSize="20sp"
+                 android:textColor="@color/black"
+                 android:layout_weight="0.2"/>
+
+             <TextView
+                 android:id="@+id/textViewPlayerCountry"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/black"
+                 android:textSize="20sp"
+                 android:layout_weight="0.8"/>
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_marginTop="20dp"
+             android:padding="10dp"
+             android:weightSum="1">
+
+
+             <TextView
+                 android:id="@+id/textViewBirthTitle"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Birth Place:"
+                 android:textSize="20sp"
+                 android:textColor="@color/black"
+                 android:layout_weight="0.2"/>
+
+             <TextView
+                 android:id="@+id/textViewPlayerBirthPlace"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/black"
+                 android:textSize="20sp"
+                 android:layout_weight="0.8"/>
+
+         </LinearLayout>
+
+         <TextView
+             android:id="@+id/textViewDescriptionTitle"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Description"
+             android:textColor="@color/black"
+             android:textSize="20sp"
+             android:padding="10dp"/>
+
+
+
+         <TextView
+             android:id="@+id/textViewPlayerDescription"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textSize="15sp"
+             android:textColor="@color/black"
+             android:padding="10dp"/>
+
+
+
+
+     </LinearLayout>
+
+     </ScrollView>
+    </FrameLayout>
+
+</layout>

@@ -12,6 +12,24 @@
     <fragment
         android:id="@+id/nav_search"
         android:name="com.example.sportsapp.fragments.SearchFragment"
-        android:label="@string/str_search"/>
+        android:label="@string/str_search">
+
+        <action
+            android:id="@+id/action_searchfragment_to_detailfragment"
+            app:destination="@+id/detailfragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailfragment"
+        android:name="com.example.sportsapp.fragments.PlayerDetailsFragment"
+        android:label="PlayerDetailsFragment">
+
+       <argument
+           android:name="playerId"
+           app:argType="string"
+           android:defaultValue="Null"/>
+
+    </fragment>
 
 </navigation>

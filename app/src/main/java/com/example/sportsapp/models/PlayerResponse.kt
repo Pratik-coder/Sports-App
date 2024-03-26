@@ -4,11 +4,11 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class PlayerResponse(
-    @SerializedName("player") val player:List<PlayerData>?
+    @SerializedName("player") @Expose val player:List<PlayerData>?
 )
 
 data class PlayerData(
-    @SerializedName("idPlayer") @Expose val idPlayer:String?,
+    @SerializedName("idPlayer") @Expose val idPlayer:String,
     @SerializedName("idTeam") @Expose val idTeam:String?,
     @SerializedName("idTeam2")@Expose val idTeam2:String?,
     @SerializedName("idTeamNational")@Expose val idTeamNational:String?,
@@ -61,7 +61,7 @@ data class PlayerData(
     @SerializedName("strHeight")@Expose val strHeight:String?,
     @SerializedName("strWeight")@Expose val strWeight:String?,
     @SerializedName("intLoved")@Expose val intLoved:String?,
-    @SerializedName("strThumb")@Expose val strThumb:String?,
+    @SerializedName("strThumb")@Expose val strThumb:String?=null,
     @SerializedName("strCutout")@Expose val strCutout:String?,
     @SerializedName("strRender")@Expose val strRender:String?,
     @SerializedName("strBanner")@Expose val strBanner:String?,

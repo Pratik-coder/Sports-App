@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sportsapp.application.SportsApplication
 import com.example.sportsapp.models.LeagueResponse
+import com.example.sportsapp.models.PlayerDetailResponse
 import com.example.sportsapp.models.PlayerResponse
 import com.example.sportsapp.network.Status
 import com.example.sportsapp.repository.SportsRepository
@@ -21,6 +22,7 @@ class SportsViewModel(private val app: Application, private val repository: Spor
 
     val leagueList=MutableLiveData<Status<LeagueResponse>>()
     val searchPlayerList=MutableLiveData<Status<PlayerResponse>>()
+    val playerDetails=MutableLiveData<Status<PlayerDetailResponse>?>()
 
     fun getLeagueList()=viewModelScope.launch{
          getAllLeagues()
@@ -28,6 +30,10 @@ class SportsViewModel(private val app: Application, private val repository: Spor
 
     fun getPlayersByFiltering(strQuery:String)=viewModelScope.launch{
          getPlayersBySearch(strQuery)
+    }
+
+    fun getPlayerDetails(strPlayerId:String)=viewModelScope.launch {
+        getPlayerDetailsById(strPlayerId)
     }
 
     private suspend fun getAllLeagues(){
@@ -63,6 +69,29 @@ class SportsViewModel(private val app: Application, private val repository: Spor
             when(t){
                 is IOException->searchPlayerList.postValue(Status.Error(message = "An Error Occurred"))
                 else->searchPlayerList.postValue(Status.Error(message = "Unexpected Error"))
+            }
+        }
+    }
+
+    private suspend fun getPlayerDetailsById(strPlayerId:String){
+        /*if (playerDetails!=null){
+            clearPreviousData()
+        }*/
+        clearPreviousData()
+        playerDetails.postValue(Status.Loading())
+        try {
+            if (hasInternetConnection()){
+                val response=repository.getPlayerDetailsById(strPlayerId)
+                playerDetails.postValue(handlePlayerDetailResponse(response=response))
+            }
+            else{
+                playerDetails.postValue(Status.Error(message = "Try Again"))
+            }
+        }
+        catch (t:Throwable){
+            when(t){
+                is IOException->playerDetails.postValue(Status.Error(message = "An Error Occurred"))
+                else->playerDetails.postValue(Status.Error(message = "Unexpected Error"))
             }
         }
     }
@@ -113,5 +142,18 @@ class SportsViewModel(private val app: Application, private val repository: Spor
             }
         }
         return Status.Error(message = "No Internet")
+    }
+
+    private fun handlePlayerDetailResponse(response: Response<PlayerDetailResponse>):Status<PlayerDetailResponse>{
+        if (response.isSuccessful){
+            response.body()?.let {
+                return Status.Success(it)
+            }
+        }
+        return Status.Error(message = "No Internet")
+    }
+
+    private fun clearPreviousData(){
+        playerDetails.value=null
     }
 }

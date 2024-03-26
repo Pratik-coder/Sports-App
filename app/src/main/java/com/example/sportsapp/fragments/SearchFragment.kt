@@ -1,6 +1,7 @@
 package com.example.sportsapp.fragments
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsapp.R
 import com.example.sportsapp.activity.HomeActivity
@@ -45,6 +47,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
 
         setUpRecyclerView()
+        playerAdapter.setOnItemClickListener {
+            val bundle=Bundle().apply {
+                putSerializable("playerId",it.idPlayer)
+            }
+            findNavController().navigate(R.id.action_searchfragment_to_detailfragment,bundle)
+        }
 
         binding.etSearch.addTextChangedListener {
             job?.cancel()
